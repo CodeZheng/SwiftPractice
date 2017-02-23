@@ -10,11 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //MARK:- 懒加载
+    fileprivate lazy var pushBtn : UIButton = {
+        let pushBtn = UIButton(type: UIButtonType.custom)
+        pushBtn.setTitle("push", for: .normal)
+        pushBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20);
+        pushBtn.setTitleColor(UIColor.red, for: .normal)
+        pushBtn.backgroundColor = UIColor.green
+        return pushBtn
+    }()
+    
+    var secondVC : SecondViewController = SecondViewController(backgroundColor: UIColor.white)
+    
+
+    //MARK:-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        setupUI()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -23,3 +37,15 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController {
+    func setupUI() {
+        pushBtn.frame = CGRect(x: self.view.frame.size.width/2 - 50, y: 200, width: 100, height: 100)
+        pushBtn.addTarget(self, action:#selector(push(sender:)) , for: .touchUpInside)
+        self.view.addSubview(pushBtn)
+    }
+    
+    func push(sender : UIButton) {
+        self.navigationController?.pushViewController(secondVC, animated: true)
+    }
+    
+}
