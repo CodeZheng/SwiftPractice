@@ -20,7 +20,61 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZh-CY-BDD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="XLu-FK-bFQ"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XLu-FK-bFQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="XLu-FK-bFQ"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WZh-CY-BDD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8mk-Zt-II8"/>
+                            <constraint firstItem="WZh-CY-BDD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JsS-XD-YeK"/>
+                            <constraint firstItem="WZh-CY-BDD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RKC-5a-RoK"/>
+                            <constraint firstItem="WZh-CY-BDD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VQR-3t-rpI"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="WZh-CY-BDD" secondAttribute="bottom" id="kHf-Gu-KXY"/>
+                            <constraint firstAttribute="trailing" secondItem="WZh-CY-BDD" secondAttribute="trailing" id="s8D-U7-1QO"/>
+                            <constraint firstAttribute="trailing" secondItem="WZh-CY-BDD" secondAttribute="trailing" id="tFt-Oy-3MT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8mk-Zt-II8"/>
+                                <exclude reference="JsS-XD-YeK"/>
+                                <exclude reference="RKC-5a-RoK"/>
+                                <exclude reference="VQR-3t-rpI"/>
+                                <exclude reference="s8D-U7-1QO"/>
+                                <exclude reference="tFt-Oy-3MT"/>
+                                <exclude reference="kHf-Gu-KXY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="JsS-XD-YeK"/>
+                                <include reference="VQR-3t-rpI"/>
+                                <include reference="tFt-Oy-3MT"/>
+                                <include reference="kHf-Gu-KXY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="8mk-Zt-II8"/>
+                                <include reference="RKC-5a-RoK"/>
+                                <include reference="s8D-U7-1QO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="lvk-JE-h1R">
                         <barButtonItem key="rightBarButtonItem" width="30" style="plain" id="HK3-U4-IHp">
