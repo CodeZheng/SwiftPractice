@@ -8,12 +8,23 @@
 
 import UIKit
 
+protocol PopupMenuDelegate {
+    func changeBackgroundRed()
+    func changeBackgroundGreen()
+    func changeBackgroundBlue()
+    func changeBackgroundOrange()
+}
+
 class popupMenuView: UIView {
     
+    //MARK:- delegate
+    var delegate : PopupMenuDelegate?
+    
     //MARK:- 重写构造函数
-    override init(frame: CGRect) {
+    init(frame: CGRect, delegate:PopupMenuDelegate) {
         super.init(frame: frame)
         self.frame = frame
+        self.delegate = delegate
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,10 +42,28 @@ extension popupMenuView {
             btn.layer.borderWidth = 2
             btn.layer.borderColor = UIColor.black.cgColor
             btn.addTarget(self, action: #selector(btnAction(sender:)), for: .touchUpInside)
+            btn.tag = i
+            btn.frame = CGRect(x: 10, y: 10+i*50, width: 80, height: 40)
+            self.addSubview(btn)
         }
     }
     
     func btnAction(sender:UIButton) {
-        
+        switch sender.tag {
+        case 0:
+            sender.setTitle("red", for: .normal)
+            self.delegate?.changeBackgroundRed()
+        case 1:
+            sender.setTitle("green", for: .normal)
+            self.delegate?.changeBackgroundGreen()
+        case 2:
+            sender.setTitle("blue", for: .normal)
+            self.delegate?.changeBackgroundBlue()
+        case 3:
+            sender.setTitle("orange", for: .normal)
+            self.delegate?.changeBackgroundOrange()
+        default:
+            break
+        }
     }
 }

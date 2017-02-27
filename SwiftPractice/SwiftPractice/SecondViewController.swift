@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController,PopupMenuDelegate {
+    
+    let orientation = UIDeviceOrientationIsPortrait(UIDevice.current.orientation)
     
     fileprivate lazy var playView : UIView = {
         let playView = UIView();
@@ -31,6 +33,7 @@ class SecondViewController: UIViewController {
     }()
     
     
+    var popupMenu : popupMenuView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,8 @@ class SecondViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
+    
+    //MARK:- 构造函数
     init(backgroundColor:UIColor) {
         super.init(nibName: nil, bundle: nil)
         self.view.backgroundColor = backgroundColor
@@ -50,6 +55,24 @@ class SecondViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK:- popup delegate method
+    func changeBackgroundRed() {
+        self.view.backgroundColor = UIColor.red
+    }
+    
+    func changeBackgroundGreen() {
+        self.view.backgroundColor = UIColor.green
+    }
+    
+    func changeBackgroundBlue() {
+        self.view.backgroundColor = UIColor.blue
+    }
+    
+    func changeBackgroundOrange() {
+        self.view.backgroundColor = UIColor.orange
+    }
+    
+    //MARK:- MemoryWarning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,17 +80,37 @@ class SecondViewController: UIViewController {
 }
 
 extension SecondViewController {
+    
     func setupUI() {
+        let orientation = UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation)
+        self.navigationController?.navigationBar.isHidden = orientation ? false : true
+        playView.frame = orientation ? CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 200) : CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
         self.view.addSubview(playView)
         self.view.addSubview(topView)
         self.view.addSubview(bottomView)
-        buttonAddAction()
+        addRightBarButton()
+        popupMenu = popupMenuView(frame: CGRect(x: UIScreen.main.bounds.width-110, y: 69, width: 100, height: 210), delegate: self)
+        popupMenu?.isHidden = true
+        popupMenu?.addButton(count: 4)
+        popupMenu?.backgroundColor = UIColor.purple
+        self.view.addSubview(popupMenu!)
     }
     
-    func buttonAddAction() {
-        
+    func addRightBarButton() {
+        let button = UIButton(type: UIButtonType.custom)
+        button.setBackgroundImage(UIImage(named: "+"), for: .normal)
+        button.addTarget(self, action: #selector(showMenu(sender:)), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barButton
     }
     
-    
-    
+    func showMenu(sender:UIButton) {
+        self.popupMenu?.isHidden = !self.popupMenu!.isHidden
+        sender.isSelected = !sender.isSelected
+        let name = sender.isSelected ? "x" : "+"
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 8.0, options: .curveEaseIn, animations: {
+            sender.setBackgroundImage(UIImage(named: name), for: .normal)
+        }, completion: nil)
+    }
 }

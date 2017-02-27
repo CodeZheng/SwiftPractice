@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
     //MARK:- 懒加载
     fileprivate lazy var pushBtn : UIButton = {
         let pushBtn = UIButton(type: UIButtonType.custom)
@@ -22,6 +23,12 @@ class ViewController: UIViewController {
     
     var secondVC : SecondViewController = SecondViewController(backgroundColor: UIColor.white)
     
+    @IBAction func showMenu(_ sender: Any) {
+        let button = sender as! UIButton
+        button.isSelected = !button.isSelected
+        let angle = button.isSelected ? (M_PI_4) : 0.0
+        button.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
+    }
 
     //MARK:-
     override func viewDidLoad() {
